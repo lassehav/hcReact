@@ -30,7 +30,7 @@ const PersonList = props => {
     );
 }
 
-Person.propTypes = {
+PersonList.propTypes = {
     persons: ImmutablePropTypes.list.isRequired,
     title: React.PropTypes.string.isRequired,       
 };
