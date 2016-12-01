@@ -1,61 +1,36 @@
 import React from 'react';
-import personService from '../services/personService';
+
 import Button from './Button';
+import { Field, reduxForm } from 'redux-form';
 
 class AddPersonForm extends React.Component {
 
     constructor(props)
     {
         super(props);
-        this.state = {
-            firstName: "",
-            lastName: ""
-        };
-        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    isValid() {
-        return (this.state.firstName !== '') && (this.state.lastName !== '');
-    }
+    render()
+    { 
+        const {handleSubmit, isValid } = this.props;
 
-    handleSubmit(e)
-    {
-        e.preventDefault();
-        
-        const { addPerson } = this.props;
-
-        const newPerson = {
-            ...personService.generatePerson(),
-            firstName: this.state.firstName,
-            lastName: this.state.lastName
-        };
-
-        addPerson(newPerson);
-    }
-
-    handleChange(stateKey)
-    {
-        return (e) => {
-            this.setState({
-                [stateKey]: e.target.value,
-            });
-        };
-    }
-
-    render() {
         return (
-            <form onSubmit={this.handleSubmit}>
+            <form onSubmit={handleSubmit}>
                 <div>
-                    <input type="text" value={this.state.firstName} onChange={this.handleChange('firstName')} placeholder="First"/>
+                    <Field name="firstName" component="input" type="text" />
                 </div>
                 <div>
-                    <input type="text" value={this.state.lastName} onChange={this.handleChange('lastName')} placeholder="Last"/>
+                    <Field name="lastName" component="input" type="text" />
                 </div>
-                <Button disabled={!this.isValid()} onClick={this.handleSubmit}>Add</Button>
+                
+                <Button  type="submit">Add</Button>
             </form>
         );
     }
-
 }
+
+AddPersonForm = reduxForm({
+  form: 'addPerson' // a unique name for this form
+})(AddPersonForm);
 
 export default AddPersonForm;
