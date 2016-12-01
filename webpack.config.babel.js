@@ -132,7 +132,7 @@ const envs = {
   },
 
   development: {
-    devtool: '#eval-source-map',
+    devtool: '#eval-source-map', // inline-source-map parempi, mutta hitaampi
     entry: {
       client: [
         'react-hot-loader/patch',
