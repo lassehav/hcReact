@@ -1,8 +1,6 @@
 import { List, Map } from 'immutable';
 import personService from '../services/personService';
 
-
-
 const defaultState = Map({
   persons: List(),
 });

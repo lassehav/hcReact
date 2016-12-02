@@ -4,6 +4,7 @@ import PersonList from '../components/PersonList';
 import AddPersonForm from '../components/AddPersonForm';
 import { List } from 'immutable';
 import personService from '../services/personService';
+import Button from '../components/Button';
 
 class Index extends React.Component {
 
@@ -26,13 +27,15 @@ class Index extends React.Component {
 
 
     render() {
-        const { persons, addPerson, deletePerson, loading } = this.props;
+        const { persons, addPerson, deletePerson, editMales, ...rest } = this.props;
+        console.log("indexpage");
+        console.log(this.props);
 
         return (
             <div>
             <AddPersonForm onSubmit={this.handleSubmit}/>
-
-            <PersonList title="Miehet" persons={persons.filter(p=>p.gender === 'm')} deletePerson={deletePerson} />
+            <Button onClick={editMales}>Test</Button>
+            <PersonList title="Miehet" activateEditingOn={this.props.editingMales} persons={persons.filter(p=>p.gender === 'm')} deletePerson={deletePerson} />
             <PersonList title="Naiset" persons={persons.filter(p=>p.gender === 'f')} deletePerson={deletePerson} />
             </div>
         );

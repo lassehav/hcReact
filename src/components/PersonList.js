@@ -7,8 +7,7 @@ const PersonList = props => {
         
     // take persons and title from props, pass everything else to rest    
     const { persons, title, ...rest } = props;
-    // same as
-    // const person = props.person;    
+        
 
     if(persons.length == 0){
         return false;

@@ -4,10 +4,11 @@ import cx from 'classnames';
 import Button from './Button';
 import { pure } from 'recompose';
 import { Link } from 'react-router';
+import CheckBox from './CheckBox';
 
 const Person = props => {
         
-    const { person, deletePerson } = props;
+    const { person, deletePerson, activateEditingOn } = props;    
     // same as
     // const person = props.person;
 
@@ -15,17 +16,26 @@ const Person = props => {
         styles.root, {
             // new JS supports property keys from variable names, use []
             [styles.male]: person.gender === 'm',
-            [styles.female]: person.gender === 'f'
+            [styles.female]: person.gender === 'f'            
+        }
+    );    
+   
+
+    const actionClasses = cx(
+        {
+            [styles.commandArea]: true,
+            [styles.hiddenCommand]: activateEditingOn
         }
     );
 
+    // <Button onClick={e => deletePerson(person)}>Delete</Button>
     return (
         <div className={classes}>
             <div className={styles.name}>
-                <Link to={`/person/${person.id}`}>{person.firstName} {person.lastName}</Link>
+                <Link className={styles.cleanLink} to={`/person/${person.id}`}>{person.firstName} {person.lastName}</Link>
             </div>
-            <div className={styles.actionButton}>
-                <Button onClick={e => deletePerson(person)}>Delete</Button>
+            <div className={actionClasses}>                
+                <CheckBox />
             </div>
         </div>
     );
